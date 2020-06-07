@@ -1,0 +1,25 @@
+class Solution {
+    public int uniquePaths(int m, int n) {
+        return uniquePathsDp(m, n,0,0,new int[m][n]);
+    }
+
+    public int uniquePathsDp(int m, int n, int i, int j, int dp[][]) {
+        if (i == m || i < 0 || j == n || j < 0) {
+            return 0;
+        }
+        
+        if (i == m - 1 && j == n - 1){
+            return 1;
+        }
+        
+        if (dp[i][j] != 0) {
+            return dp[i][j];
+        }
+        
+        int sum = uniquePathsDp(m, n, i+1, j, dp) + uniquePathsDp(m, n, i, j+1, dp);
+        
+        dp[i][j] = sum;
+        
+        return sum;
+    }
+}
